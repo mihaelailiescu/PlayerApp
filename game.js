@@ -1,15 +1,16 @@
 class Game {
-    constructor(score) {
+    constructor() {
         this.containerMap = this.showMap();
         this.player = new Player('mihaela', this.containerMap.getBoundingClientRect());
         this.setUpPlayerMovement();
-        this.score = score;
+        this.score = 100;
         this.obstacle1 = new Obstacle(this.containerMap);
         this.obstacle1.showObstacle();
         this.obstacle2 = new Obstacle(this.containerMap);
         this.obstacle2.showObstacle();
         this.obstacle3 = new Obstacle(this.containerMap);
         this.obstacle3.showObstacle();
+        this.player.setScore(this.score);
     }
 
     //logica de miscare
@@ -76,17 +77,11 @@ class Game {
         const isIntersect1 = diffX1 < obstacle1Rect.width & diffY1 < obstacle1Rect.height;
         const isIntersect2 = diffX2 < obstacle2Rect.width & diffY2 < obstacle2Rect.height;
         const isIntersect3 = diffX3 < obstacle3Rect.width & diffY3 < obstacle3Rect.height;
-        if (isIntersect1) {
-            this.score = score++;
-            Text("Score:" + this.score)
+        if (isIntersect1 || isIntersect2 || isIntersect3) {
+            this.score--;
+            this.player.setScore(this.score);
             return true;
-        } else if (isIntersect2) {
-            this.score = score++;
-            return true;
-        } else if (isIntersect3) {
-            this.score = score++;
-            return true;
-        }
+        } else { return false; }
     }
 }
-const game1 = new Game(100);
+const game1 = new Game();

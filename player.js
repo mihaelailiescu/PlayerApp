@@ -3,6 +3,7 @@ class Player {
         this.name = name;
         this.containerMapRect = containerMapRect;
         this.div = Player.afisare();
+        this.scoreDiv = this.showScore();
     }
 
     moveDown() {
@@ -62,7 +63,25 @@ class Player {
         return div;
     }
 
+    showScore() {
+        const div = document.createElement('div');
+        const { style } = div;
+        style.width = "20px";
+        style.height = "10px";
+        style.position = "absolute";
+        div.style.top = "20px";
+        div.style.left = "20px";
+        document.body.appendChild(div)
 
+        return div;
+
+    }
+
+    setScore(score) {
+        this.scoreDiv.innerHTML = `
+            <p> ${score}</p>
+            `
+    }
 }
 
 

@@ -39,6 +39,10 @@ class Obstacle {
         return div;
     }
 
+    removeObstacle() {
+        this.obstacleDOM.remove();
+    }
+
     returnObstacleCoordinates() {
         return this.obstacleDOM.getBoundingClientRect();
     }

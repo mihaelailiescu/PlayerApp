@@ -1,9 +1,9 @@
 class Game {
-    constructor() {
+    constructor(score) {
         this.containerMap = this.showMap();
-        this.player = new Player('mihaela', this.containerMap.getBoundingClientRect(), 100);
+        this.player = new Player('mihaela', this.containerMap.getBoundingClientRect());
         this.setUpPlayerMovement();
-        //  this.player.showScore();
+        this.score = score;
         this.obstacle1 = new Obstacle(this.containerMap);
         this.obstacle1.showObstacle();
         this.obstacle2 = new Obstacle(this.containerMap);
@@ -37,9 +37,13 @@ class Game {
                 }
             }
             if (this.playerHitsObstacle()) {
-                // reset onstacles
+                this.obstacle1.removeObstacle();
+                this.obstacle2.removeObstacle();
+                this.obstacle3.removeObstacle();
+                this.obstacle1.showObstacle();
+                this.obstacle2.showObstacle();
+                this.obstacle3.showObstacle();
             }
-
         })
     }
 
@@ -54,21 +58,35 @@ class Game {
         return div;
     }
 
-    // playerHitsObstacle() {
-    //     // verificam daca rectangleul player ului a intersectat rectabgle vreunui obstacel
-    //     const obstacle1Rect = this.obstacle1.returnObstacleCoordinates();
-    //     const playerRect = this.player.returnPlayerCoordinates();
+    playerHitsObstacle() {
+        //aducem coordonatele playerului si coordonatele obstacolului
+        const obstacle1Rect = this.obstacle1.returnObstacleCoordinates();
+        const obstacle2Rect = this.obstacle2.returnObstacleCoordinates();
+        const obstacle3Rect = this.obstacle3.returnObstacleCoordinates();
+        const playerRect = this.player.returnPlayerCoordinates();
 
-    //     if (obstacle1Rect.x < playerRect.x && obstacle1Rect.y < playerRect.y && 
-    //         (playerRect.x - obstacle1Rect.x <= obstacle1Rect.width) && 
-    //         (playerRect.y - obstacle1Rect.y < obstacle1Rect.height) ) return true;
-    //     else  if (playerRect.x < obstacle1Rect.x && obstacle1Rect.y < playerRect.y &&
-    //         (obstacle1Rect.x - playerRect.x < playerRect.width) &&
-    //         (playerRect.y - obstacle1Rect.y <= playerRect.height) ) return true;
-    //         else if ()
+        //facem diferenta dintre ele 
+        const diffX1 = Math.abs(playerRect.x - obstacle1Rect.x);
+        const diffY1 = Math.abs(playerRect.y - obstacle1Rect.y);
+        const diffX2 = Math.abs(playerRect.x - obstacle2Rect.x);
+        const diffY2 = Math.abs(playerRect.y - obstacle2Rect.y);
+        const diffX3 = Math.abs(playerRect.x - obstacle3Rect.x);
+        const diffY3 = Math.abs(playerRect.y - obstacle3Rect.y);
 
-
-
-    // }
+        const isIntersect1 = diffX1 < obstacle1Rect.width & diffY1 < obstacle1Rect.height;
+        const isIntersect2 = diffX2 < obstacle2Rect.width & diffY2 < obstacle2Rect.height;
+        const isIntersect3 = diffX3 < obstacle3Rect.width & diffY3 < obstacle3Rect.height;
+        if (isIntersect1) {
+            this.score = score++;
+            Text("Score:" + this.score)
+            return true;
+        } else if (isIntersect2) {
+            this.score = score++;
+            return true;
+        } else if (isIntersect3) {
+            this.score = score++;
+            return true;
+        }
+    }
 }
-const game1 = new Game();
+const game1 = new Game(100);

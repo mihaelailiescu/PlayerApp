@@ -1,10 +1,8 @@
 class Player {
-    constructor(name, containerMapRect, score) {
+    constructor(name, containerMapRect) {
         this.name = name;
         this.containerMapRect = containerMapRect;
-        // this.score = score;
         this.div = Player.afisare();
-        // this.showScore();
     }
 
     moveDown() {
@@ -54,22 +52,17 @@ class Player {
         const { style } = div;
         style.width = "20px";
         style.height = "20px";
-        style.backgroundColor = "red";
+        style.backgroundColor = "blue";
         style.position = "absolute";
-        div.style.top = "20px";
-        div.style.left = "20px";
+        div.style.top = "8px";
+        div.style.left = "8px";
 
         document.body.appendChild(div);
 
         return div;
     }
 
-    // showScore() {
-    //     // const div = document.createElement('div');
-    //     // div.setAttribute("id", "score");
-    //     // let score = 100;
-    //     // document.getElementsById('score').innerHTML = "Score: " + score
-    // }
+
 }
 
 

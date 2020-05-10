@@ -66,7 +66,7 @@ class Player {
     showScore() {
         const div = document.createElement('div');
         const { style } = div;
-        style.width = "20px";
+        style.width = "10px";
         style.height = "10px";
         style.position = "absolute";
         div.style.top = "20px";
